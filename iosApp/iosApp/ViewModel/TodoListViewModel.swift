@@ -33,4 +33,10 @@ class TodoListViewModel: ObservableObject {
             todos[index] = updatedTodo
         }
     }
+    
+    func updateTodo(_ updatedTodo: Todo) {
+        if let index = todos.firstIndex(where: { $0.id == updatedTodo.id }) {
+            todos[index] = updatedTodo
+        }
+    }
 }
