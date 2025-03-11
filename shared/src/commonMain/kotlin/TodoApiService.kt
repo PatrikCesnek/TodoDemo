@@ -1,10 +1,14 @@
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
+
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.DEFAULT
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.get
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.serialization.kotlinx.json.*
-import io.ktor.client.plugins.logging.*
 
 class TodoApiService {
     private val client = HttpClient {
@@ -19,7 +23,9 @@ class TodoApiService {
     }
 
     suspend fun getTodos(): List<Todo> {
-        return client.get("https://jsonplaceholder.typicode.com/todos").body()
+        val response: String = client.get("https://jsonplaceholder.typicode.com/todos").body()
+        println("Raw API Response: $response")
+        return Json.decodeFromString(response)
     }
 
     suspend fun getTodo(id: Int): Todo {

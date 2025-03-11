@@ -30,6 +30,9 @@ struct TodoListView: View {
                 }
             }
             .navigationTitle("To-Do List")
+            .onAppear {
+                viewModel.fetchTodos()
+            }
         }
     }
 }
