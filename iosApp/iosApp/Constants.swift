@@ -16,6 +16,8 @@ struct Constants {
         static let save = "Save"
         static let edit = "Edit"
         static let tryAgain = "Try again"
+        static let title = "Title"
+        static let completedToggle = "Completed"
     }
     
     struct Images {

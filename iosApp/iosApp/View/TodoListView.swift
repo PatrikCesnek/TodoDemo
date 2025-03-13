@@ -20,15 +20,26 @@ struct TodoListView: View {
                 ErrorView(error: error, tryAgain: viewModel.fetchTodos)
             } else {
                 List(viewModel.todos, id: \.id) { todo in
-                    NavigationLink(destination: TodoDetailView(todo: todo, onUpdate: { updatedTodo in
-                        viewModel.updateTodo(updatedTodo)
-                    })) {
+                    NavigationLink(
+                        destination: TodoDetailView(
+                            todo: todo,
+                            onUpdate: { updatedTodo in
+                                viewModel.updateTodo(updatedTodo)
+                            }
+                        )
+                    ) {
                         HStack {
-                            Button(action: {
-                                viewModel.toggleTodoCompletion(todo)
-                            }) {
-                                Image(systemName: todo.isCompleted ? Constants.Images.checkmarkFill : Constants.Images.checkmarkEmpty)
-                                    .foregroundColor(todo.isCompleted ? .green : .gray)
+                            Button(
+                                action: {
+                                    viewModel.toggleTodoCompletion(todo)
+                                }
+                            ) {
+                                Image(
+                                    systemName: todo.isCompleted
+                                    ? Constants.Images.checkmarkFill
+                                    : Constants.Images.checkmarkEmpty
+                                )
+                                .foregroundColor(todo.isCompleted ? .green : .gray)
                             }
                             .buttonStyle(BorderlessButtonStyle())
 

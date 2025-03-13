@@ -35,7 +35,12 @@ class TodoListViewModel: ObservableObject {
 
     func toggleTodoCompletion(_ todo: Todo) {
         if let index = todos.firstIndex(where: { $0.id == todo.id }) {
-            let updatedTodo = Todo(userId: todo.userId, id: todo.id, title: todo.title, isCompleted: !todo.isCompleted)
+            let updatedTodo = Todo(
+                userId: todo.userId,
+                id: todo.id,
+                title: todo.title,
+                isCompleted: !todo.isCompleted
+            )
             todos[index] = updatedTodo
         }
     }

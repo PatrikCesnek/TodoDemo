@@ -27,10 +27,10 @@ struct TodoDetailView: View {
     var body: some View {
         Form {
             Section {
-                TextField("Title", text: $editedTitle)
+                TextField(Constants.Strings.title, text: $editedTitle)
                     .disabled(!isEditing)
                 
-                Toggle("Completed", isOn: $isCompleted)
+                Toggle(Constants.Strings.completedToggle, isOn: $isCompleted)
                     .disabled(!isEditing)
             }
             
@@ -44,7 +44,12 @@ struct TodoDetailView: View {
         .toolbar {
             Button(isEditing ? Constants.Strings.save : Constants.Strings.edit) {
                 if isEditing {
-                    let updatedTodo = Todo(userId: todo.userId, id: todo.id, title: editedTitle, isCompleted: isCompleted)
+                    let updatedTodo = Todo(
+                        userId: todo.userId,
+                        id: todo.id,
+                        title: editedTitle,
+                        isCompleted: isCompleted
+                    )
                     onUpdate(updatedTodo)
                 }
                 isEditing.toggle()

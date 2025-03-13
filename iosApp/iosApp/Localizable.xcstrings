@@ -12,6 +12,16 @@
         }
       }
     },
+    "Completed" : {
+      "localizations" : {
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dokončené"
+          }
+        }
+      }
+    },
     "Edit" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -30,6 +40,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uložiť"
+          }
+        }
+      }
+    },
+    "Title" : {
+      "localizations" : {
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Názov"
           }
         }
       }
