@@ -30,8 +30,13 @@ struct TodoDetailView: View {
                 TextField(Constants.Strings.title, text: $editedTitle)
                     .disabled(!isEditing)
                 
-                Toggle(Constants.Strings.completedToggle, isOn: $isCompleted)
-                    .disabled(!isEditing)
+                Toggle(
+                    isCompleted
+                    ? Constants.Strings.completed
+                    : Constants.Strings.notCompleted,
+                    isOn: $isCompleted
+                )
+                .disabled(!isEditing)
             }
             
             Section {

@@ -13,6 +13,7 @@
       }
     },
     "Completed" : {
+      "extractionState" : "manual",
       "localizations" : {
         "sk" : {
           "stringUnit" : {
@@ -33,6 +34,17 @@
         }
       }
     },
+    "Not Completed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nedokončené"
+          }
+        }
+      }
+    },
     "Save" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -45,6 +57,7 @@
       }
     },
     "Title" : {
+      "extractionState" : "manual",
       "localizations" : {
         "sk" : {
           "stringUnit" : {
