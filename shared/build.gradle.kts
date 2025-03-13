@@ -32,7 +32,6 @@ kotlin {
             implementation("io.ktor:ktor-client-logging:2.3.3")
             implementation("io.ktor:ktor-client-content-negotiation:2.3.3")
             implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.3")
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
         }
         commonTest.dependencies {

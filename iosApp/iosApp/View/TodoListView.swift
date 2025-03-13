@@ -14,28 +14,36 @@ struct TodoListView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.todos, id: \.id) { todo in
-                NavigationLink(destination: TodoDetailView(todo: todo, onUpdate: { updatedTodo in
-                    viewModel.updateTodo(updatedTodo)
-                })) {
-                    HStack {
-                        Button(action: {
-                            viewModel.toggleTodoCompletion(todo)
-                        }) {
-                            Image(systemName: todo.isCompleted ? "checkmark.square.fill" : "square")
-                                .foregroundColor(todo.isCompleted ? .green : .gray)
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
+            if viewModel.isLoading {
+                ProgressView()
+            } else if let error = viewModel.error {
+                ErrorView(error: error, tryAgain: viewModel.fetchTodos)
+            } else {
+                List(viewModel.todos, id: \.id) { todo in
+                    NavigationLink(destination: TodoDetailView(todo: todo, onUpdate: { updatedTodo in
+                        viewModel.updateTodo(updatedTodo)
+                    })) {
+                        HStack {
+                            Button(action: {
+                                viewModel.toggleTodoCompletion(todo)
+                            }) {
+                                Image(systemName: todo.isCompleted ? Constants.Images.checkmarkFill : Constants.Images.checkmarkEmpty)
+                                    .foregroundColor(todo.isCompleted ? .green : .gray)
+                            }
+                            .buttonStyle(BorderlessButtonStyle())
 
-                        Text(todo.title)
-                            .strikethrough(todo.isCompleted, color: .gray)
-                            .foregroundColor(todo.isCompleted ? .gray : .primary)
+                            Text(todo.title)
+                                .strikethrough(todo.isCompleted, color: .gray)
+                                .foregroundColor(todo.isCompleted ? .gray : .primary)
+                        }
                     }
                 }
-            }
-            .navigationTitle("To-Do List")
-            .onAppear {
-                viewModel.fetchTodos()
+                .navigationTitle(Constants.Strings.mainViewTitle)
+                .onAppear {
+                    if viewModel.todos.isEmpty {
+                        viewModel.fetchTodos()
+                    }
+                }
             }
         }
     }

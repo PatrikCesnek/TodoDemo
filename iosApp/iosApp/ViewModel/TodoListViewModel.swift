@@ -10,19 +10,25 @@ import Combine
 import shared
 import SwiftUI
 
+@MainActor
 class TodoListViewModel: ObservableObject {
     @Published var todos: [Todo] = []
+    @Published var isLoading = false
+    @Published var error: String?
     
     private let repository = TodoRepository(apiService: TodoApiService())
 
-    @MainActor
     func fetchTodos() {
+        isLoading = true
         Task {
             do {
+                self.error = nil
                 let fetchedTodos = try await repository.fetchTodos()
                 self.todos = fetchedTodos
+                isLoading = false
             } catch {
-                print("Error fetching todos: \(error)")
+                self.error = error.localizedDescription
+                isLoading = false
             }
         }
     }
@@ -37,6 +43,15 @@ class TodoListViewModel: ObservableObject {
     func updateTodo(_ updatedTodo: Todo) {
         if let index = todos.firstIndex(where: { $0.id == updatedTodo.id }) {
             todos[index] = updatedTodo
+            self.todos = todos
+            Task {
+                do {
+                    self.error = nil
+                    try await repository.updateTodo(todo: updatedTodo)
+                } catch {
+                    self.error = error.localizedDescription
+                }
+            }
         }
     }
 }

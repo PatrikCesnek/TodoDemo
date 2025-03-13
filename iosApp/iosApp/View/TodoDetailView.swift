@@ -35,14 +35,14 @@ struct TodoDetailView: View {
             }
             
             Section {
-                Text("Click on edit to edit todo, then click on save to save the changes.")
+                Text(Constants.Strings.hint)
                     .font(.caption)
             }
         }
-        .navigationTitle("Todo Detail")
+        .navigationTitle(Constants.Strings.detailTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Button(isEditing ? "Save" : "Edit") {
+            Button(isEditing ? Constants.Strings.save : Constants.Strings.edit) {
                 if isEditing {
                     let updatedTodo = Todo(userId: todo.userId, id: todo.id, title: editedTitle, isCompleted: isCompleted)
                     onUpdate(updatedTodo)
